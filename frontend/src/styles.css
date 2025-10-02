@@ -1,0 +1,110 @@
+:root { --bg:#0b0e14; --card:#121722; --muted:#a3a9b7; --text:#e6e9ef; --accent:#6aa1ff; }
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
+a{color:var(--accent);text-decoration:none}
+
+/* layout */
+.container{min-height:100%;display:grid;grid-template-rows:auto 1fr auto}
+.header{padding:12px 16px;border-bottom:1px solid #1d2333;background:var(--card)}
+.nav{display:flex;gap:12px;align-items:center;justify-content:space-between}
+.brand{font-weight:700}
+.main{padding:16px}
+.footer{padding:12px 16px;border-top:1px solid #1d2333;background:var(--card);color:var(--muted)}
+
+.card{background:var(--card);border:1px solid #1d2333;border-radius:12px;padding:12px}
+
+/* controls */
+.input{background:#0f1421;border:1px solid #1d2333;border-radius:8px;padding:8px 10px;color:var(--text);min-width:220px}
+.select{background:#0f1421;border:1px solid #1d2333;border-radius:8px;padding:8px 10px;color:var(--text)}
+.btn{background:#1a2030;border:1px solid #2a334d;border-radius:8px;padding:8px 12px;color:var(--text);cursor:pointer}
+.btn.primary{background:#1e2a44;border:1px solid #314877}
+.badge{display:inline-block;padding:2px 6px;border-radius:6px;background:#1a253a;color:#9fb8ff;font-size:12px}
+
+/* toolbar */
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.checkbox-inline{display:inline-flex;gap:6px;align-items:center}
+.controls{display:flex;gap:8px;align-items:center}
+.actions{display:flex;gap:8px}
+
+/* table */
+.table-wrap{overflow:auto;-webkit-overflow-scrolling:touch;max-height:calc(100vh - 220px)}
+.table{width:100%;border-collapse:collapse;font-size:14px}
+.table th,.table td{padding:10px 8px;border-bottom:1px solid #1d2333;white-space:nowrap}
+.table th{font-weight:600;text-align:left;cursor:pointer;position:sticky;top:0;background:var(--card);z-index:1}
+
+/* grid helpers */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* ---------- mobile polish ---------- */
+@media (max-width: 720px){
+  .header,.footer{padding:10px 12px}
+  .main{padding:12px}
+  .card{padding:10px}
+
+  .toolbar{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    align-items:stretch;
+  }
+  .controls{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .actions{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .input,.select,.btn{width:100%}
+
+  .table{font-size:13px}
+  /* скрываем второстепенные колонки на узких экранах:
+     4: Должность, 5: Статус */
+  .table th:nth-child(4), .table td:nth-child(4),
+  .table th:nth-child(5), .table td:nth-child(5){display:none}
+}
+
+@media (max-width: 420px){
+  .table{font-size:12px}
+  .badge{font-size:11px;padding:2px 6px}
+}
+
+/* keep */
+@media (max-width: 720px){ .grid2{grid-template-columns:1fr} }
+
+/* скрыть/показать блоки по брейкпоинту */
+.hide-desktop { display: none; }
+@media (max-width: 720px){
+  .hide-mobile { display: none; }
+  .hide-desktop { display: block; }
+}
+
+/* карточки пользователей для мобилы */
+.cards { display: grid; gap: 10px; }
+.user-card{
+  background: var(--card);
+  border: 1px solid #1d2333;
+  border-radius: 12px;
+  padding: 12px;
+}
+.uc-header{
+  display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px;
+}
+.uc-name{ font-weight:700; color: var(--text); }
+.uc-row{
+  display:flex; justify-content:space-between; gap:12px; padding:6px 0; border-top:1px solid #1a2131;
+}
+.uc-row:first-of-type{ border-top:0; padding-top:0; }
+.uc-label{ color: var(--muted); }
+.uc-value{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width: 65%; }
+.uc-actions{
+  display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-top:10px;
+}
+
+/* маленькие экраны — кнопки на всю ширину в столбик */
+@media (max-width: 420px){
+  .uc-actions{ grid-template-columns: 1fr; }
+}

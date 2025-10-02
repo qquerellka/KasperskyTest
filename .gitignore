@@ -1,0 +1,24 @@
+# common
+.DS_Store
+node_modules/
+dist/
+coverage/
+*.log
+*.tmp
+
+# env & local db
+.env
+.env.*.local
+backend/.env
+frontend/.env
+backend/dev.db
+backend/dev-restore-test.db
+backend/backup/
+
+# build artifacts
+backend/dist/
+frontend/dist/
+
+# editor
+.vscode/
+.idea/
