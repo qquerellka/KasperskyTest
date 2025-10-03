@@ -3,7 +3,6 @@ import { registry as userRegistry, UserDto, UserCreateDto, UserPatchDto } from "
 
 export function buildOpenApi() {
   const registry = new OpenAPIRegistry();
-  // merge registries
   for (const compName of userRegistry.definitions.keys()) {
     const comp = userRegistry.definitions.get(compName);
     if (comp) registry.registerComponent("schema", compName, comp.schema);
@@ -12,15 +11,14 @@ export function buildOpenApi() {
   const generator = new OpenApiGeneratorV3(registry.definitions);
   const doc = generator.generateDocument({
     openapi: "3.0.0",
-    info: { title: "Users API", version: "1.0.0" },
+    info: { title: "API пользователей", version: "1.0.0" },
     paths: {},
   });
 
-  // Minimal paths (hand-written for brevity)
   doc.paths = {
     "/api/users": {
       get: {
-        summary: "List users",
+        summary: "Список пользователей",
         parameters: [
           { name: "page", in: "query", schema: { type: "integer" } },
           { name: "perPage", in: "query", schema: { type: "integer" } },
@@ -31,17 +29,17 @@ export function buildOpenApi() {
         ]
       },
       post: {
-        summary: "Create user",
+        summary: "Создать пользователя",
         requestBody: { content: { "application/json": { schema: { $ref: "#/components/schemas/UserCreate" } } } }
       }
     },
     "/api/users/{id}": {
-      get: { summary: "Get user", parameters: [{ name:"id", in:"path", required:true, schema:{ type:"integer" } }]},
-      patch: { summary: "Patch user" },
-      delete: { summary: "Delete user" }
+      get: { summary: "Получить пользователя", parameters: [{ name:"id", in:"path", required:true, schema:{ type:"integer" } }]},
+      patch: { summary: "Изменить пользователя" },
+      delete: { summary: "Удалить пользователя" }
     },
     "/api/groups": {
-      get: { summary: "List groups" }
+      get: { summary: "Список групп" }
     }
   };
 

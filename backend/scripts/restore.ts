@@ -49,7 +49,6 @@ async function main() {
     await prisma.group.deleteMany();
   }
 
-  // Insert groups first
   for (const g of groups) {
     await prisma.group
       .create({
@@ -63,7 +62,6 @@ async function main() {
       .catch(() => {});
   }
 
-  // Users
   for (const u of users) {
     await prisma.user
       .create({
@@ -85,7 +83,6 @@ async function main() {
       .catch(() => {});
   }
 
-  // Memberships
   for (const m of memberships) {
     const userId =
       typeof m.userId === "string" ? parseInt(m.userId, 10) : m.userId;

@@ -2,7 +2,6 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-// Simple faker-like helpers (no external deps)
 const firstNames = [
   "Alex",
   "Maxim",
@@ -91,7 +90,6 @@ async function main() {
       },
     });
 
-    // 40% без группы, 45% с одной, 15% с двумя
     const r = Math.random();
     if (r < 0.4) continue;
     if (r < 0.85) {

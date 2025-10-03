@@ -11,7 +11,7 @@ export async function listUsers(opts: {
   const { skip, take, q, orderBy, groupId, ungroupedOnly } = opts;
   const where: any = {};
   if (q && q.trim()) {
-    const qv = q.trim(); // без toLowerCase
+    const qv = q.trim();
     where.OR = [
       { firstName: { contains: qv } },
       { lastName: { contains: qv } },

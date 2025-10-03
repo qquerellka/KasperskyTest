@@ -1,6 +1,6 @@
-# Project Runner Toolkit
+# Инструменты запуска проекта
 
-Put these files in the **parent folder** that contains both projects:
+Поместите эти файлы в **родительскую папку**, которая содержит оба проекта:
 
 ```
 /your-workspace/
@@ -9,7 +9,7 @@ Put these files in the **parent folder** that contains both projects:
   run_all.sh
   Makefile
 ```
-## Usage
+## Использование
 ```bash
 chmod +x run_all.sh
 ./run_all.sh
@@ -17,7 +17,7 @@ chmod +x run_all.sh
 # Frontend: http://localhost:5173
 ```
 
-### Makefile shortcuts
+### Сокращения Makefile
 ```bash
 make setup
 make dev

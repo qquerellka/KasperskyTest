@@ -121,7 +121,7 @@ export default function UsersPage() {
                   <td>{u.email}</td>
                   <td>{u.title ?? "—"}</td>
                   <td>
-                    <span className="badge">{u.isActive ? "active" : "inactive"}</span>
+                    <span className="badge">{u.isActive ? "активный" : "неактивный"}</span>
                   </td>
                   <td style={{ textAlign: "right" }}>
                     <button className="btn" onClick={() => onDelete(u.id)}>
@@ -143,7 +143,7 @@ export default function UsersPage() {
                   {u.lastName} {u.firstName}
                 </Link>
                 <span className={clsx("badge", u.isActive ? "ok" : "muted")}>
-                  {u.isActive ? "active" : "inactive"}
+                  {u.isActive ? "активный" : "неактивный"}
                 </span>
               </div>
               <div className="uc-row">

@@ -9,9 +9,7 @@ export function useMediaQuery(query: string) {
   useEffect(() => {
     const mql = window.matchMedia(query);
     const handler = () => setMatches(mql.matches);
-    // современные браузеры
     mql.addEventListener?.("change", handler);
-    // fallback
     mql.addListener?.(handler);
     handler();
     return () => {

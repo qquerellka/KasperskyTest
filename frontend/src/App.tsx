@@ -5,14 +5,14 @@ export default function App() {
     <div className="container">
       <header className="header">
         <nav className="nav">
-          <NavLink to="/users" className="brand">Users Admin</NavLink>
-          <a href={import.meta.env.VITE_API_URL + "/docs"} target="_blank" rel="noreferrer">API Docs</a>
+          <NavLink to="/users" className="brand">Управление пользователями</NavLink>
+          <a href={import.meta.env.VITE_API_URL + "/docs"} target="_blank" rel="noreferrer">Документация API</a>
         </nav>
       </header>
       <main className="main">
         <Outlet />
       </main>
-      <footer className="footer">© Test Task</footer>
+      <footer className="footer">© Тестовое задание</footer>
     </div>
   );
 }
