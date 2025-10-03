@@ -1,4 +1,4 @@
-const allowed = new Set(["createdAt","lastName","email","title"]);
+const allowed = new Set(["createdAt", "lastName", "email", "title"]);
 export function parseSorting(query: any) {
   const s = (query.sort as string) || "";
   if (!s.includes(":")) return { orderBy: { createdAt: "desc" as const } };

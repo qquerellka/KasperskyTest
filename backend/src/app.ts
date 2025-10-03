@@ -8,7 +8,7 @@ import { groupsRouter } from "./modules/groups/groups.router.js";
 import { membershipsRouter } from "./modules/memberships/memberships.router.js";
 import { errorHandler } from "./middlewares/error.js";
 import { notFound } from "./middlewares/notFound.js";
-import openapi from "./docs/openapi.json" assert { type: "json" };
+import { buildOpenApi } from "./docs/openapi.js";
 
 export function createApp() {
   const app = express();
@@ -22,6 +22,7 @@ export function createApp() {
   app.use("/api/groups", groupsRouter);
   app.use("/api", membershipsRouter);
 
+  const openapi = buildOpenApi();
   app.use("/docs", swaggerUi.serve, swaggerUi.setup(openapi));
 
   app.use(notFound);

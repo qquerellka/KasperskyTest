@@ -22,20 +22,30 @@ export default function UsersPage() {
   const [q, setQ] = useState("");
   const [groupId, setGroupId] = useState<number | undefined>(undefined);
   const [ungroupedOnly, setUngroupedOnly] = useState(false);
-  const [{ field, dir }, setSort] = useState<{ field: SortField; dir: SortDir }>(
-    { field: "createdAt", dir: "desc" }
-  );
+  const [{ field, dir }, setSort] = useState<{
+    field: SortField;
+    dir: SortDir;
+  }>({ field: "createdAt", dir: "desc" });
 
   const sortParam = `${field}:${dir}`;
-  const usersQ = useGetUsersQuery({ page, perPage, q, sort: sortParam, groupId, ungroupedOnly });
+  const usersQ = useGetUsersQuery({
+    page,
+    perPage,
+    q,
+    sort: sortParam,
+    groupId,
+    ungroupedOnly,
+  });
   const groupsQ = useGetGroupsQuery();
 
   const [createUser] = useCreateUserMutation();
   const [deleteUser] = useDeleteUserMutation();
 
   function toggleSort(f: SortField) {
-    setSort((s) =>
-      s.field === f ? { field: f, dir: s.dir === "asc" ? "desc" : "asc" } : { field: f, dir: "asc" }
+    setSort(s =>
+      s.field === f
+        ? { field: f, dir: s.dir === "asc" ? "desc" : "asc" }
+        : { field: f, dir: "asc" }
     );
   }
 
@@ -56,17 +66,23 @@ export default function UsersPage() {
     <div className="card">
       <div className="toolbar">
         <div className="controls">
-          <SearchInput value={q} onChange={(v) => { setPage(1); setQ(v); }} />
+          <SearchInput
+            value={q}
+            onChange={v => {
+              setPage(1);
+              setQ(v);
+            }}
+          />
           <select
             className="select"
             value={groupId ?? ""}
-            onChange={(e) => {
+            onChange={e => {
               setGroupId(e.target.value ? Number(e.target.value) : undefined);
               setPage(1);
             }}
           >
             <option value="">Все группы</option>
-            {groupsQ.data?.map((g) => (
+            {groupsQ.data?.map(g => (
               <option key={g.id} value={g.id}>
                 {g.name} ({g.membersCount})
               </option>
@@ -77,7 +93,7 @@ export default function UsersPage() {
             <input
               type="checkbox"
               checked={ungroupedOnly}
-              onChange={(e) => {
+              onChange={e => {
                 setUngroupedOnly(e.target.checked);
                 setPage(1);
               }}
@@ -98,10 +114,30 @@ export default function UsersPage() {
           <table className="table">
             <thead>
               <tr>
-                <Th label="Фамилия" active={field === "lastName"} dir={dir} onClick={() => toggleSort("lastName")} />
-                <Th label="Имя" active={field === "createdAt"} dir={dir} onClick={() => toggleSort("createdAt")} />
-                <Th label="Email" active={field === "email"} dir={dir} onClick={() => toggleSort("email")} />
-                <Th label="Должность" active={field === "title"} dir={dir} onClick={() => toggleSort("title")} />
+                <Th
+                  label="Фамилия"
+                  active={field === "lastName"}
+                  dir={dir}
+                  onClick={() => toggleSort("lastName")}
+                />
+                <Th
+                  label="Имя"
+                  active={field === "createdAt"}
+                  dir={dir}
+                  onClick={() => toggleSort("createdAt")}
+                />
+                <Th
+                  label="Email"
+                  active={field === "email"}
+                  dir={dir}
+                  onClick={() => toggleSort("email")}
+                />
+                <Th
+                  label="Должность"
+                  active={field === "title"}
+                  dir={dir}
+                  onClick={() => toggleSort("title")}
+                />
                 <th>Статус</th>
                 <th></th>
               </tr>
@@ -112,7 +148,7 @@ export default function UsersPage() {
                   <td colSpan={6}>Загрузка...</td>
                 </tr>
               )}
-              {usersQ.data?.items.map((u) => (
+              {usersQ.data?.items.map(u => (
                 <tr key={u.id}>
                   <td>
                     <Link to={`/users/${u.id}`}>{u.lastName}</Link>
@@ -121,7 +157,9 @@ export default function UsersPage() {
                   <td>{u.email}</td>
                   <td>{u.title ?? "—"}</td>
                   <td>
-                    <span className="badge">{u.isActive ? "активный" : "неактивный"}</span>
+                    <span className="badge">
+                      {u.isActive ? "активный" : "неактивный"}
+                    </span>
                   </td>
                   <td style={{ textAlign: "right" }}>
                     <button className="btn" onClick={() => onDelete(u.id)}>
@@ -136,7 +174,7 @@ export default function UsersPage() {
       ) : (
         <div className="cards">
           {usersQ.isLoading && <div className="badge">Загрузка…</div>}
-          {usersQ.data?.items.map((u) => (
+          {usersQ.data?.items.map(u => (
             <article className="user-card" key={u.id}>
               <div className="uc-header">
                 <Link to={`/users/${u.id}`} className="uc-name">
@@ -155,17 +193,32 @@ export default function UsersPage() {
                 <span className="uc-value">{u.title ?? "—"}</span>
               </div>
               <div className="uc-actions">
-                <Link className="btn primary" to={`/users/${u.id}`}>Открыть</Link>
-                <button className="btn" onClick={() => onDelete(u.id)}>Удалить</button>
+                <Link className="btn primary" to={`/users/${u.id}`}>
+                  Открыть
+                </Link>
+                <button className="btn" onClick={() => onDelete(u.id)}>
+                  Удалить
+                </button>
               </div>
             </article>
           ))}
         </div>
       )}
 
-      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 12 }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: 12,
+        }}
+      >
         <div className="badge">найдено: {usersQ.data?.total ?? 0}</div>
-        <Pagination page={page} perPage={perPage} total={usersQ.data?.total ?? 0} onPage={setPage} />
+        <Pagination
+          page={page}
+          perPage={perPage}
+          total={usersQ.data?.total ?? 0}
+          onPage={setPage}
+        />
       </div>
     </div>
   );

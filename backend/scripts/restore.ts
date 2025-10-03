@@ -18,10 +18,7 @@ function parseArgs() {
 
 function readJsonl(file: string) {
   if (!fs.existsSync(file)) return [];
-  const lines = fs
-    .readFileSync(file, "utf-8")
-    .split(/\r?\n/)
-    .filter(Boolean);
+  const lines = fs.readFileSync(file, "utf-8").split(/\r?\n/).filter(Boolean);
   return lines.map((l) => JSON.parse(l));
 }
 

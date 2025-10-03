@@ -15,9 +15,9 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <UsersPage /> },
       { path: "/users", element: <UsersPage /> },
-      { path: "/users/:id", element: <UserPage /> }
-    ]
-  }
+      { path: "/users/:id", element: <UserPage /> },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
