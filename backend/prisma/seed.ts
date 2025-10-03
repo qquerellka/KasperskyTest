@@ -43,7 +43,7 @@ function pick<T>(arr: T[]) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 function emailOf(fn: string, ln: string, i: number) {
-  return `${fn}.${ln}.${i}@example.com`.toLowerCase();
+  return `${fn}.${ln}.${Date.now()}.${i}@example.com`.toLowerCase();
 }
 function phone() {
   const d = () => Math.floor(Math.random() * 10);
